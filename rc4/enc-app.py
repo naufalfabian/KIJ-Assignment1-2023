@@ -23,10 +23,10 @@ def encrypt_rc4(key, plaintext):
     return ciphertext
 
 # Inisialisasi key dan iv untuk setiap algoritma
-aes_key = b'\x12\x34\x56\x78\x90\xAB\xCD\xEF\x12\x34\x56\x78\x90\xAB\xCD\xEF'
+aes_key = b'babingepbabingep'
 des_key = b'babingep'
-rc4_key = b'\x12\x34\x56\x78\x90\xAB\xCD\xEF\x12\x34\x56\x78\x90\xAB\xCD\xEF'
-iv = b'burungjh'
+rc4_key = b'babingepbabingep'
+iv = b'burungjhburungjh'
 
 # Baca file yang akan dikirim
 filename = 'sample_file.txt'  # Ganti dengan nama file yang ingin dikirim
@@ -34,7 +34,7 @@ with open(filename, 'rb') as file:
     plaintext = file.read()
 
 # Pilih algoritma enkripsi secara acak (AES, DES, atau RC4)
-encryption_choice = 'DES'
+encryption_choice = 'RC4'
 
 # Enkripsi file sesuai dengan algoritma yang dipilih
 if encryption_choice == 'AES':

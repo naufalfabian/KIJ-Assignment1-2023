@@ -23,9 +23,9 @@ def decrypt_rc4(key, ciphertext):
     return plaintext
 
 # Inisialisasi key dan iv untuk setiap algoritma
-aes_key = b'\x12\x34\x56\x78\x90\xAB\xCD\xEF\x12\x34\x56\x78\x90\xAB\xCD\xEF'
+aes_key = b'babingepbabingep'
 des_key = b'babingep'
-rc4_key = b'\x12\x34\x56\x78\x90\xAB\xCD\xEF\x12\x34\x56\x78\x90\xAB\xCD\xEF'
+rc4_key = b'babingepbabingep'
 iv = b'burungjh'
 
 # Buka socket untuk menerima ciphertext dari pengirim
