@@ -3,6 +3,7 @@ from Crypto.Cipher import AES, DES, ARC4
 from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
 import random
+import time
 
 # Fungsi untuk mengenkripsi pesan menggunakan AES
 def encrypt_aes(key, iv, plaintext):
@@ -38,12 +39,15 @@ encryption_choice = 'AES'
 
 # Enkripsi file sesuai dengan algoritma yang dipilih
 if encryption_choice == 'AES':
+    start_time = time.time()
     ciphertext = encrypt_aes(aes_key, iv, plaintext)
     algorithm = 'AES'
 elif encryption_choice == 'DES':
+    start_time = time.time()
     ciphertext = encrypt_des(des_key, iv, plaintext)
     algorithm = 'DES'
 elif encryption_choice == 'RC4':
+    start_time = time.time()
     ciphertext = encrypt_rc4(rc4_key, plaintext)
     algorithm = 'RC4'
 
@@ -51,6 +55,16 @@ elif encryption_choice == 'RC4':
 ciphertext_filename = 'ciphertext.txt'  # Nama file ciphertext baru
 with open(ciphertext_filename, 'wb') as file:
     file.write(ciphertext)
+
+# Hitung waktu eksekusi enkripsi
+end_time = time.time()
+running_time = end_time - start_time
+
+# Simpan hasil running time ke dalam file teks
+result_filename = 'result.txt'  # Nama file untuk menyimpan hasil running time
+with open(result_filename, 'w') as file:
+    file.write(f'Hasil running time enkripsi adalah: {running_time} detik\n')
+    file.write(f'Algoritma enkripsi yang digunakan: {algorithm}\n')
 
 # Kirim informasi tentang algoritma enkripsi yang digunakan ke penerima
 # (Misalnya, melalui header pesan atau protokol komunikasi yang telah disepakati sebelumnya)
@@ -60,3 +74,4 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(('127.0.0.1', 7777))  # Ganti dengan IP address dan port number penerima
 sock.sendall(ciphertext)
 sock.close()
+

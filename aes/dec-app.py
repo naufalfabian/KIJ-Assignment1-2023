@@ -3,6 +3,7 @@ from Crypto.Cipher import AES, DES, ARC4
 from Crypto.Util.Padding import unpad
 from Crypto.Random import get_random_bytes
 import random
+import time
 
 # Fungsi untuk mendekripsi pesan menggunakan AES
 def decrypt_aes(key, iv, ciphertext):
@@ -28,6 +29,12 @@ des_key = b'babingep'
 rc4_key = b'babingepbabingep'
 iv = b'burungjhburungjh'
 
+# Baca algoritma enkripsi yang digunakan dari file result.txt
+result_filename = 'result.txt' # Nama file yang berisi hasil running time
+with open(result_filename, 'r') as file:
+    lines = file.readlines()
+algorithm = lines[1].strip().split(': ')[1]
+
 # Buka socket untuk menerima ciphertext dari pengirim
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(('127.0.0.1', 7777))  # Ganti dengan IP address dan port number yang sama dengan pengirim
@@ -52,14 +59,26 @@ algorithm = 'AES'  # Ganti dengan algoritma yang sesuai
 
 # Dekripsi ciphertext sesuai dengan algoritma yang digunakan oleh pengirim
 if algorithm == 'AES':
+    start_time = time.time()
     plaintext = decrypt_aes(aes_key, iv, ciphertext)
 elif algorithm == 'DES':
+    start_time = time.time()
     plaintext = decrypt_des(des_key, iv, ciphertext)
 elif algorithm == 'RC4':
+    start_time = time.time()
     plaintext = decrypt_rc4(rc4_key, ciphertext)
+
+# Hitung waktu eksekusi dekripsi
+end_time = time.time()
+running_time = end_time - start_time
 
 # Simpan file yang sudah didekripsi
 filename = 'decrypted_file.txt'  # Ganti dengan nama file yang diinginkan
 with open(filename, 'wb') as file:
     file.write(plaintext)
 print("File telah didekripsi dan disimpan sebagai:", filename)
+
+# Simpan hasil running time ke dalam file teks
+result_filename = 'result.txt' # Nama file untuk menyimpan hasil running time
+with open(result_filename, 'a') as file: # Menggunakan mode 'a' agar menambahkan hasil running time ke file yang sudah ada
+    file.write(f'Hasil running time deskripsi adalah: {running_time} detik\n')

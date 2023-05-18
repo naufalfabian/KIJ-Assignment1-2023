@@ -1,0 +1,2 @@
+Hasil running time enkripsi adalah: 0.0009996891021728516 detik
+Algoritma enkripsi yang digunakan: RC4
