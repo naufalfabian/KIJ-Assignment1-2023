@@ -1,0 +1,3 @@
+Hasil running time enkripsi adalah: 0.00099945068359375 detik
+Algoritma enkripsi yang digunakan: AES
+Hasil running time deskripsi adalah: 0.0009982585906982422 detik
